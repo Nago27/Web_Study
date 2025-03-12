@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<head>
+    <title></title>
+    <script>
+        const a = Number(prompt('숫자를 입력해주세요.',''))
+
+        if (a % 2 == 0){
+            console.log('입력한 숫자는 짝수입니다.')
+        }
+        else {
+            console.log('입력한 숫자는 홀수입니다.')
+        }
+
+        const date = new Date()
+        const hour = date.getHours()
+
+        switch (true){
+            case hour < 11:
+                alert('아침 먹을 시간입니다.')
+                break
+            case hour < 15:
+                alert('점심 먹을 시간입니다.')
+                break
+            default:
+                alert('저녁 먹을 시간입니다.')
+                break    
+        }
+        
+    </script>
+</head>
+<body>
+    
+</body>
+</html>
