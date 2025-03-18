@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<head>
+    <title></title>
+    <script>
+        // 매개변수를 배열과 숫자 둘다 받을 수 있는 max 함수
+        const max = function (first, ...rests) {
+            let ouput
+            let items
+
+            if (Array.isArray(first)) {
+                output = first[0]
+                items = first
+            }
+            else if(typeof(first) == 'number') {
+                ouput = first
+                items = rests
+            }
+
+            for (const data of items) {
+                if(ouput < data) { ouput = data }
+            }
+            return ouput
+        }
+
+        console.log(`max(배열): ${max([1,2,3,4])}`)
+        console.log(`max(숫자, ...): ${max(1,2,3,4)}`)
+    </script>
+</head>
+<body>
+    
+</body>
+</html>
