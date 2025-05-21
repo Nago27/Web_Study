@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>mousemove로 자유롭게 그리기</title>
+    <script>
+        let canvas, context;
+        window.onload = init;
+
+        function init() {
+            canvas = document.getElementById("myCanvas");
+            context = canvas.getContext("2d");
+            context.lineWidth = document.getElementById("inWidth").value;
+            context.strokeStyle = document.getElementById("inColor").value;
+
+            canvas.addEventListener("mousemove", function(e) { move(e) }, false);
+            canvas.addEventListener("mouseenter", function(e) { enter(e) }, false);
+            canvas.addEventListener("mouseleave", function(e) { out(e) }, false);
+        }
+
+        let X = 0, Y = 0; // 마우스 마지막 위치
+        let inMouse = false;
+        function move(e) {
+            let curX = e.offsetX;
+            let curY = e.offsetY;
+
+            if(!inMouse) {
+                X = curX;
+                Y = curY;
+                inMouse = true;
+            }
+            context.beginPath();
+            context.moveTo(X, Y);
+            context.lineTo(curX, curY);
+            context.stroke();
+            X = curX; Y = curY;
+        }
+        function enter(e) {
+            inMouse = true;
+            X = e.offsetX;
+            Y = e.offsetY;
+        }
+        function out(e) {
+            inMouse = false;
+        }
+    </script>
+</head>
+<body>
+    <h3>mousemove로 자유롭게 그리세요</h3>
+    <hr>
+    선 굵기: <input id="inWidth" type="number" value="5" onchange="context.lineWidth=this.value">
+    선 색: <input id="inColor" type="color" value="#000000" onchange="context.strokeStyle=this.value">
+    <br>
+    <canvas id="myCanvas" width="400" height="400" style="background-color: aliceblue"></canvas>
+</body>
+</html>
