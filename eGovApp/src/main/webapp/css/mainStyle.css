@@ -1,0 +1,341 @@
+@charset "UTF-8";
+
+:root {
+  --primary-color: #007bff;
+  --primary-dark: #0056b3;
+  --text-color: #333333;
+}
+
+/* Reset and base styles */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+body {
+  font-family: Arial, sans-serif;
+  background: #fff;
+  color: var(--text-color);
+}
+
+/* Wrapper centering */
+#wrapper {
+  width: 90%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Header styling */
+#header {
+  background-color: #bedaf2;
+  position: relative;
+  padding: 25px;
+}
+
+/* User info styling */
+#user-info {
+  position: absolute;
+  top: 50%;
+  right: 0.5rem;
+  transform: translateY(-50%);
+  background-color: #4d5862;
+  color: #fff;
+  padding: 0.5rem 1rem;
+  border-radius: 1rem;
+  font-size: 0.875rem;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+}
+#user-info a {
+  color: #fff;
+  padding: 0.25rem 0.75rem;
+  border-radius: 1rem;
+  text-decoration: none;
+  margin-left: 0.5rem;
+}
+
+/* ===== Global Navigation ===== */
+nav.gnb {
+  background-color: var(--primary-color);
+  border-bottom: 2px solid var(--primary-color);
+}
+nav.gnb ul {
+  list-style: none;
+  display: flex;
+  margin: 0;
+  gap: 1rem
+}
+nav.gnb li {
+  position: relative;
+}
+nav.gnb li > a {
+  display: block;
+  padding: 0.75rem 2rem;
+  color: #fff;
+  text-decoration: none;
+}
+/* Active state: underline */
+nav.gnb li > a.active {
+  border-bottom: 3px solid var(--primary-color);
+}
+/* Hover state: darker text */
+nav.gnb li > a:hover {
+  color: var(--primary-dark);
+}
+/* Submenu styling */
+nav.gnb li ol {
+  display: none !important;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  min-width: 100%;
+  background-color: #fff;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  z-index: 100;
+}
+nav.gnb li:hover > ol,
+nav.gnb li > a:hover + ol {
+  display: block !important;
+}
+nav.gnb li ol li {
+  border-bottom: 1px solid #ddd;
+}
+nav.gnb li ol li:last-child {
+  border-bottom: none;
+}
+nav.gnb li ol li a {
+  display: block;
+  padding: 0.5rem 1.5rem;
+  color: var(--text-color);
+  text-decoration: none;
+}
+nav.gnb li ol li a:hover {
+  background-color: var(--primary-color);
+  color: #fff;
+}
+
+
+/* ===== Search Box Full-Width ===== */
+.searchBox {
+  width: 100% !important;
+  margin-bottom: 1rem;
+}
+.searchBox form {
+  display: flex;
+  gap: 0.5rem;
+  width: 100%;
+}
+.searchBox select {
+  flex: 0 0 150px;
+  padding: 0.5rem;
+  border: 1px solid var(--primary-color);
+  border-radius: 3px;
+}
+.searchBox input[type="text"] {
+  flex: 1;
+  padding: 0.5rem;
+  border: 1px solid var(--primary-color);
+  border-radius: 3px;
+}
+.searchBox button {
+  background-color: #303b50;
+  color: #fff;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 3px;
+  cursor: pointer;
+}
+.searchBox button:hover {
+  opacity: 0.9;
+}
+
+.post_contents {
+  position: relative;
+  padding: 20px;	
+}
+
+/* ===== h2 style ===== */
+.headline {
+  position: relative;
+  font-size: 21px;
+  font-weight: 500;                    
+  padding-left: 13px;
+  margin-bottom: 10px;             
+  border-left: 6px solid #00a050;
+  line-height: 1em;  
+}
+
+
+/* ===== Table Styling ===== */
+fieldset {
+	border: none;
+}
+
+legend {
+  border: none;
+  overflow: hidden;
+  width: 1px;
+  height: 1px;
+  font-size: 1px;
+}
+
+.table_box {
+  width: 100%;
+  background-color: #fff;
+  border-collapse: collapse;
+}
+
+.table_box td {
+  padding: 0.75rem;
+  border: 1px solid #ddd;
+  text-align: left;
+}
+.table_box th {
+  font-size: 14px;
+  font-weight: 600;
+  padding: 0.75rem;
+  border: 1px solid #ddd;
+  background-color: #f6f9ff;
+  text-align: left;
+}
+
+.table_box input[type=text] {
+	width: 100%;
+	height: 30px;
+	border: 1px solid #e6e6e6;
+	padding-left: 8px;
+}
+
+.table_box textarea {
+	width: 100%;
+    height: 100px;
+    border: 1px solid #e6e6e6;
+    padding: 15px;
+}
+
+/* ===== Pagination Styling ===== */
+.num_page {
+  width: 100%;
+  text-align: center;
+  margin: 1rem 0;
+}
+.num_page ul {
+  list-style: none;
+  display: inline-flex;
+  gap: 0.25rem;
+  margin: 0;
+  padding: 0;
+}
+.num_page li {
+  display: inline-block;
+}
+.num_page a {
+  display: block;
+  padding: 0.5rem 0.75rem;
+  border: 1px solid var(--primary-color);
+  color: var(--primary-color);
+  text-decoration: none;
+  border-radius: 3px;
+}
+.num_page a:hover {
+  background-color: var(--primary-color);
+  color: #fff;
+}
+.num_page li.active a {
+  background-color: var(--primary-color);
+  color: #fff;
+}
+.num_page li.disabled a {
+  color: #ccc;
+  border-color: #ccc;
+  pointer-events: none;
+}
+
+/* ===== Button Style ===== */
+.write_btn_container {
+  text-align: right;
+  margin: 0.5rem 0;
+}
+.write_btn {
+  display: inline-block;
+  background-color: var(--primary-color);
+  color: #fff;
+  padding: 0.75rem 1.25rem;
+  border-radius: 0.5rem;
+  text-decoration: none;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+  font-weight: bold;
+}
+
+.btn-box {
+	text-align: right;
+	padding-top: 20px;
+}
+.btn-box a {
+	width: 120px;
+	height: 40px;
+	text-align: center;
+	font-size: 14px;
+	padding: 9px;
+	display: inline-block;
+}
+
+.btn_write {
+	background-color: var(--primary-color);
+	color: #fff;
+	border: 1px solid var(--primary-color);
+}
+
+.btn_cancel {
+	border: 1px solid var(--primary-color);
+	color: var(--primary-color);
+}
+
+/* ===== file ===== */
+.file {
+	display: flex;
+	align-items: center;
+	gap: 0.5rem;
+}
+.file-btn {
+padding: 0.5rem 1rem;
+  border: 1px solid #888;
+  background: #303b50;
+  color: #fff;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+#attachedList {
+  flex: 1;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  max-height: 100px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 0.5rem;
+  box-sizing: border-box;
+}
+#attachedList li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.2rem 0;
+}
+.remove-btn {
+  background: none;
+  border: none;
+  color: #c00;
+  font-weight: bold;
+  cursor: pointer;
+  font-size: 14px;
+}
+.remove-btn:hover {
+  color: #f00;
+}
+

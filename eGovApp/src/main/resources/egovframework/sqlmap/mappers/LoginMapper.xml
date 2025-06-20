@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="LoginMapper">
+
+	<resultMap id="Login_rm" type="egovframework.example.cmmn.LoginVO">
+		<result column="USER_ID" property="user_id" />
+		<result column="PASSWORD" property="password" />
+		<result column="NAME" property="name" />
+		<result column="BIRTH" property="birth" />
+		<result column="EMAIL" property="email" />
+		<result column="PHONE" property="phone" />
+		<result column="USER_SE" property="user_se" />
+	</resultMap>
+	
+	<!-- 로그인 -->
+	<select id="actionLogin" parameterType="egovframework.example.cmmn.LoginVO" resultMap="Login_rm">
+		SELECT * FROM MEMBER
+		WHERE USER_ID = #{user_id}
+	</select>
+	
+	<!-- 아이디 중복 확인 -->
+	<select id="searchId" parameterType="egovframework.example.cmmn.LoginVO" resultMap="Login_rm">
+		SELECT * FROM MEMBER
+		WHERE USER_ID = #{user_id}
+	</select>
+	
+	<!-- 비밀번호 찾기 -->
+	<select id="searchPassword" parameterType="egovframework.example.cmmn.LoginVO" resultMap="Login_rm">
+		SELECT * FROM MEMBER
+		WHERE USER_ID = #{user_id}
+		AND EMAIL = #{email}
+	</select>
+	
+	<!-- 회원 가입 -->
+	<insert id="registerMember" parameterType="egovframework.example.cmmn.LoginVO">
+		INSERT INTO MEMBER (USER_ID, NAME, PASSWORD, BIRTH, EMAIL, PHONE, USER_SE)
+		VALUES (#{user_id}, #{name}, #{password}, #{birth}, #{email}, #{phone}, #{user_se})
+	</insert>
+</mapper>

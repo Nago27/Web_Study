@@ -1,0 +1,5 @@
+Manifest-Version: 1.0
+Built-By: DGS-54HSNPC
+Build-Jdk: 11
+Created-By: Maven Integration for Eclipse
+
