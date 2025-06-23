@@ -93,8 +93,27 @@ public class BoardController {
 		return "redirect:/main.do";
 	}
 	
-	@RequestMapping(value="/BoardView.do")
-	public String BoardViewPage() throws Exception {
-		return "BoardView";
+	@RequestMapping(value="/BoardDetail.do")
+	public String showBoardDetail(@ModelAttribute BoardVO boardVO, HttpServletRequest request, Model model) throws Exception {
+		// 세션에서 로그인 정보 꺼내기
+		HttpSession session = request.getSession();
+		LoginVO loginUser = (session != null) ? (LoginVO) session.getAttribute("loginUser") : null;
+				
+		if (loginUser == null || loginUser.getUser_id() == null) {
+			return "redirect:/LoginUsr.do";
+		}
+		
+		// 조회수 증가
+		int b_id = boardVO.getBoardId();
+		boardService.viewCnt(b_id);
+		
+		// 게시글 매퍼 호출
+		BoardVO detail = boardService.boardDetail(boardVO);
+		
+		// model 담기
+		model.addAttribute("name", loginUser.getName());
+		model.addAttribute("boardData", detail);
+		
+		return "BoardDetail";
 	}
 }

@@ -10,7 +10,8 @@ import egovframework.example.main.service.BoardVO;
 import egovframework.example.main.service.BoardView;
 
 @Repository("boardDAO")
-public class BoardDAO extends EgovAbstractMapper{
+public class BoardDAO extends EgovAbstractMapper {
+
 	/* 게시글 작성 */
 	public void insertBoard(BoardVO vo) throws Exception{
 		insert("BoardMapper.insertBoard", vo);
@@ -27,11 +28,22 @@ public class BoardDAO extends EgovAbstractMapper{
 	}
 	
 	/* 게시글 총 갯수 조회 */
-	public int boardListTotCnt (BoardView vo) throws Exception {
-		return selectOne("BoardMapper.boardListTotCnt", vo);
+	public Integer boardListTot (BoardView vo) throws Exception {
+		return (Integer) selectOne("BoardMapper.boardListTot", vo);
 	}
 	
-	/* 게시글 내용 확인 
-	public BoardVO boardView(BoardVO vo) throws Exception;
-	*/
+	/* 조회수 증가 */
+	public void viewCnt(int boardId) throws Exception {
+		update("BoardMapper.viewCnt", boardId);
+	}
+	
+	/* 게시글 내용 확인 */ 
+	public BoardVO boardDetail(BoardVO vo) throws Exception {
+		return selectOne("BoardMapper.boardDetail", vo);
+	}
+	
+	/* 게시글 삭제 */
+	public void deleteBoard(BoardVO vo) throws Exception {
+		
+	}
 }

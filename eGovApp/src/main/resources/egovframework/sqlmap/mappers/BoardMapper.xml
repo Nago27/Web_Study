@@ -13,7 +13,9 @@
 	<insert id="insertBoard" parameterType="egovframework.example.main.service.BoardVO" 
 			useGeneratedKeys="true" keyProperty="boardId">
 		INSERT INTO BOARD(author, title, content, allow_comment)
-		VALUES (#{author}, #{title}, #{content}, #{allowComment})
+		VALUES (#{author}, #{title}, #{content}, 
+			<if test="allowComment == null">DEFAULT</if>
+        	<if test="allowComment != null">#{allowComment}</if>);
 	</insert>
 	<!-- 첨부파일 추가 -->
 	<insert id="insertAttachment" parameterType="egovframework.example.main.service.BoardVO">
@@ -24,32 +26,47 @@
 	<!-- 게시글 불러오기 -->
 	<select id="boardList" parameterType="egovframework.example.main.service.BoardView" resultMap="BoardViewMap">
 		SELECT * FROM BOARD
-		<where>
-			<if test="searchType != null and serchText != null and serchText != ''">
-				<choose>
-					<when test="searchType == '1'"> AND title   LIKE CONCAT('%', #{searchText}, '%') </when>
-        			<when test="searchType == '2'"> AND author  LIKE CONCAT('%', #{searchText}, '%') </when>
-        			<when test="searchType == '3'"> AND content LIKE CONCAT('%', #{searchText}, '%') </when>
-				</choose>
+		WHERE 1=1
+			
+			<if test="searchType != 0 and searchText != null and searchText != ''">
+				  <choose>
+            		<when test="searchType == 1"> AND title   LIKE CONCAT('%', #{searchText}, '%') </when>
+            		<when test="searchType == 2"> AND author  LIKE CONCAT('%', #{searchText}, '%') </when>
+            		<when test="searchType == 3"> AND content LIKE CONCAT('%', #{searchText}, '%') </when>
+        		</choose>
 			</if>
-		</where>
 		ORDER BY board_id DESC
 		LIMIT #{firstIndex}, #{pageUnit}
 	</select>
 	
 	<!-- 게시글 총 갯수 조회 -->
-	<select id="boardListTotCnt" resultType="int" resultMap="BoardViewMap">
+	<select id="boardListTot" parameterType="egovframework.example.main.service.BoardView" resultType="java.lang.Integer">
 		SELECT COUNT(*) FROM BOARD
 		<where>
-			<if test="searchType != null and searchKeyword != null">
+			<if test="searchType != 0 and searchText != null">
 				<choose>
-					<when test="searchType == '1'"> AND title   LIKE CONCAT('%', #{searchText}, '%') </when>
-        			<when test="searchType == '2'"> AND author  LIKE CONCAT('%', #{searchText}, '%') </when>
-        			<when test="searchType == '3'"> AND content LIKE CONCAT('%', #{searchText}, '%') </when>
+					<when test="searchType == 1"> AND title   LIKE CONCAT('%', #{searchText}, '%') </when>
+        			<when test="searchType == 2"> AND author  LIKE CONCAT('%', #{searchText}, '%') </when>
+        			<when test="searchType == 3"> AND content LIKE CONCAT('%', #{searchText}, '%') </when>
 				</choose>
 			</if>
 		</where>
-</select>
+	</select>
+	
+	<!-- 조회수 증가 -->
+	<update id="viewCnt" parameterType="int">
+		UPDATE BOARD
+		SET views = views + 1
+     	WHERE board_id = #{boardId}
+	</update>
 	
 	<!-- 게시글 조회 -->
+	<select id="boardDetail" parameterType="egovframework.example.main.service.BoardVO" resultMap="BoardViewMap">
+		SELECT * FROM BOARD 
+		WHERE board_id = #{boardId}
+	</select>
+
+	<!-- 첨부파일 조회 -->
+	
+	<!-- 댓글 조회 -->
 </mapper>

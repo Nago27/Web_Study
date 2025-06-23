@@ -39,7 +39,7 @@
     <!-- mariadb -->
     <bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource" destroy-method="close">
     	<property name="driverClassName" value="org.mariadb.jdbc.Driver" />
-    	<property name="url" value="jdbc:mariadb://10.0.0.2:3306/egovdb"></property>
+    	<property name="url" value="jdbc:mariadb://db:3306/egovdb"></property>
     	<property name="username" value="egovuser" />
  		<property name="password" value="1234" />   
     </bean>

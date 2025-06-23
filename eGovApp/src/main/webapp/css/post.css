@@ -1,0 +1,49 @@
+@charset "UTF-8";
+
+.detail_title {
+	padding : 15px 20px;
+	background: #f6f9ff;
+	border-top: 2px solid #222;
+	border-bottom: 1px solid #d4ddef;
+}
+
+.detail_title h2 {
+	font: bold 20px / 24px arial;
+	padding-bottom: 5px;
+}
+
+.detail_title ul li:first-child {
+    padding-left: 0;
+}
+
+.detail_title ul li {
+	display: inline-block;
+	color: #666;
+    padding: 0 12px;
+    position: relative;
+    font-size: 14px;
+    z-index: 1;
+}
+
+.detail_title ul li:not(:first-child)::after {
+    display: block;
+    content: "";
+    position: absolute;
+    left: 0px;
+    top: 7px;
+    width: 1px;
+    height: 14px;
+    background: #ccc;
+}
+
+
+.detail_content {
+	width: 100%;
+    background: #fff;
+    font-size: 1em;
+    line-height: 1.6em;
+    min-height: 300px;
+    padding: 1.5em 2em;
+    list-style-type: decimal;
+    overflow: auto;
+}

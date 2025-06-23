@@ -9,7 +9,7 @@ public class BoardView implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
 	/* 검색조건 */
-    private String searchType;
+    private int searchType;
     
     /* 검색어 */
     private String searchText;
@@ -32,11 +32,11 @@ public class BoardView implements Serializable{
     /* pageUnit과 같은 역활 */
     private int recordCntPerPage;
 
-	public String getSearchType() {
+	public int getSearchType() {
 		return searchType;
 	}
 
-	public void setSearchType(String searchType) {
+	public void setSearchType(int searchType) {
 		this.searchType = searchType;
 	}
 
