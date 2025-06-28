@@ -26,7 +26,7 @@ public class BoardVO implements Serializable{
 	private LocalDateTime createdAt;
 	
 	/* 댓글 허용 여부 */
-	private Boolean allowComment;
+	private int allowComment;
 	
 	/* 댓글수  */
 	private int commentCnt;
@@ -34,7 +34,7 @@ public class BoardVO implements Serializable{
 	/* 조회수 */
 	private int views;
 
-	
+	/** GET/SET */
 	public int getBoardId() {
 		return boardId;
 	}
@@ -75,11 +75,11 @@ public class BoardVO implements Serializable{
 		this.createdAt = createdAt;
 	}
 
-	public Boolean getAllowComment() {
+	public int getAllowComment() {
 		return allowComment;
 	}
 
-	public void setAllowComment(Boolean allowComment) {
+	public void setAllowComment(int allowComment) {
 		this.allowComment = allowComment;
 	}
 

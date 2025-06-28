@@ -15,14 +15,17 @@
 <div class="container">
 	<h2>로그인</h2>
 	<form action="<c:url value='/LogCheck.do' />" method="post"> 
-		<input type="text" name="user_id" placeholder="아이디" />
-		<input type="password" name="password" placeholder="비밀번호" />
-		<input type="submit" class="login_btn" value="로그인" />
+		<ul class="loginForm">
+			<li><input type="text" name="user_id" placeholder="아이디" /></li>
+			<li><input type="password" name="password" placeholder="비밀번호" /></li>
+			<li><input type="submit" class="login_btn" value="로그인" /></li>
+		</ul>
+		
 	</form>
 	
 	<!-- 메세지 출력 -->
 	<c:if test="${!empty message}">
-		<p style="color: red;">${message}</p>
+		<p style="color: red; text-align: center;">${message}</p>
 	</c:if>
 	
 	<div class="signup">

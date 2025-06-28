@@ -17,11 +17,17 @@ public interface BoardService {
 	public Integer boardListTot(BoardView vo) throws Exception;
 	
 	/* 조회수 증가 */
-	public void viewCnt(int b_id) throws Exception;
+	public void viewCnt(int boardId) throws Exception;
 	
 	/* 게시글 내용 확인 */
 	public BoardVO boardDetail(BoardVO vo) throws Exception;
 	
+	/* 댓글 카운트 갱신 */
+	public void updateCommentCnt(int boardId) throws Exception;
+	
+	/* 게시글 수정 */
+	public void updateBoard(BoardVO vo) throws Exception;
+	
 	/* 게시글 삭제 */
-	public void deleteBoard(BoardVO vo) throws Exception;
+	public void removeBoard(int boardId) throws Exception;
 }

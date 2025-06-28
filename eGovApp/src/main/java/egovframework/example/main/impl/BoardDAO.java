@@ -10,8 +10,7 @@ import egovframework.example.main.service.BoardVO;
 import egovframework.example.main.service.BoardView;
 
 @Repository("boardDAO")
-public class BoardDAO extends EgovAbstractMapper {
-
+public class BoardDAO extends EgovAbstractMapper{
 	/* 게시글 작성 */
 	public void insertBoard(BoardVO vo) throws Exception{
 		insert("BoardMapper.insertBoard", vo);
@@ -42,8 +41,23 @@ public class BoardDAO extends EgovAbstractMapper {
 		return selectOne("BoardMapper.boardDetail", vo);
 	}
 	
+	/* 댓글 카운트 업데이트 */
+	public int updateCommentCnt(int boardId) {
+		return update("BoardMapper.updateCommentCnt", boardId);
+	}
+	
+	/* 게시글 수정 */
+	public int updateBoard(BoardVO vo) {
+		return update("BoardMapper.updateBoard", vo);
+	}
+	
 	/* 게시글 삭제 */
-	public void deleteBoard(BoardVO vo) throws Exception {
-		
+	public int deleteBoard(int boardId) {
+		return delete("BoardMapper.deleteBoard", boardId);
+	}
+	
+	/* AUTO_INCREMENT 리셋 */
+	public void resetBoardId() {
+		update("BoardMapper.resetBoardId");
 	}
 }

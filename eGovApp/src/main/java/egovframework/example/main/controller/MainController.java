@@ -9,7 +9,7 @@ import javax.servlet.http.HttpSession;
 import org.egovframe.rte.fdl.property.EgovPropertyService;
 import org.egovframe.rte.ptl.mvc.tags.ui.pagination.PaginationInfo;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.ModelMap;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -19,7 +19,6 @@ import egovframework.example.main.service.BoardView;
 
 @Controller
 public class MainController {
-
 	@Resource(name="boardService")
 	private BoardService boardService;
 	
@@ -27,8 +26,7 @@ public class MainController {
 	protected EgovPropertyService propertyService;
 	
 	@RequestMapping(value="/main.do")
-	public String mainPage(@ModelAttribute("searchVO") BoardView searchVO, HttpServletRequest request, ModelMap model) throws Exception {
-
+	public String mainPage(@ModelAttribute("searchVO") BoardView searchVO, HttpServletRequest request, Model model) throws Exception {
 		// 세션에서 로그인 정보 꺼내기
 		HttpSession session = request.getSession();
 		LoginVO loginUser = (session != null) ? (LoginVO) session.getAttribute("loginUser") : null;
@@ -37,7 +35,7 @@ public class MainController {
 			return "redirect:/LoginUsr.do";
 		}
 		
-		
+		// 페이지 레코드
 		searchVO.setPageUnit(propertyService.getInt("pageUnit")); 
         searchVO.setPageSize(propertyService.getInt("pageSize"));
         
@@ -55,16 +53,16 @@ public class MainController {
         // 목록 + 총건수 조회
         List<BoardView> list = boardService.boardList(searchVO);
         int tot = boardService.boardListTot(searchVO);
-        
-        System.out.print(">> 게시글 리스트 사이즈: " + list.size());
-
         paginationInfo.setTotalRecordCount(tot);
+        
+        int boardNo = tot - ((searchVO.getPageIndex()- 1) * searchVO.getPageSize());
 
         // Model에 결과 담기
         model.addAttribute("name", loginUser.getName());
-        model.addAttribute("paginationInfo", paginationInfo);
         model.addAttribute("resultList", list);
         model.addAttribute("searchVO", searchVO);
+        model.addAttribute("paginationInfo", paginationInfo);
+        model.addAttribute("boardNo", boardNo);
 		
 		return "main";
 	}

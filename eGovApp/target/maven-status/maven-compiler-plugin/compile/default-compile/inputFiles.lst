@@ -13,7 +13,11 @@
 /Users/ldg/Documents/Web_Study/eGovApp/src/main/java/egovframework/example/main/controller/MainController.java
 /Users/ldg/Documents/Web_Study/eGovApp/src/main/java/egovframework/example/main/impl/BoardDAO.java
 /Users/ldg/Documents/Web_Study/eGovApp/src/main/java/egovframework/example/main/impl/BoardServiceImpl.java
+/Users/ldg/Documents/Web_Study/eGovApp/src/main/java/egovframework/example/main/impl/BoardUtilDAO.java
+/Users/ldg/Documents/Web_Study/eGovApp/src/main/java/egovframework/example/main/impl/BoardUtilServiceImpl.java
 /Users/ldg/Documents/Web_Study/eGovApp/src/main/java/egovframework/example/main/service/BoardFileVO.java
 /Users/ldg/Documents/Web_Study/eGovApp/src/main/java/egovframework/example/main/service/BoardService.java
+/Users/ldg/Documents/Web_Study/eGovApp/src/main/java/egovframework/example/main/service/BoardUtilService.java
 /Users/ldg/Documents/Web_Study/eGovApp/src/main/java/egovframework/example/main/service/BoardVO.java
 /Users/ldg/Documents/Web_Study/eGovApp/src/main/java/egovframework/example/main/service/BoardView.java
+/Users/ldg/Documents/Web_Study/eGovApp/src/main/java/egovframework/example/main/service/CommentVO.java

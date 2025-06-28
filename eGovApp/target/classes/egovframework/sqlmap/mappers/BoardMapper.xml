@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="BoardMapper">
-	<resultMap id="BoardViewMap" type="egovframework.example.main.service.BoardVO">
+	<resultMap id="BoardVOMap" type="egovframework.example.main.service.BoardVO">
 		<result column="board_id"   property="boardId"/>
 		<result column="title"      property="title"/>
 		<result column="author"     property="author"/>
   		<result column="created_at" property="createdAt"/>
+  		<result column="allow_comment" property="allowComment"></result>
+  		<result column="comment_cnt" property="commentCnt"></result>
   		<result column="views"      property="views"/>
 	</resultMap>
 
@@ -17,27 +19,28 @@
 			<if test="allowComment == null">DEFAULT</if>
         	<if test="allowComment != null">#{allowComment}</if>);
 	</insert>
+
 	<!-- 첨부파일 추가 -->
-	<insert id="insertAttachment" parameterType="egovframework.example.main.service.BoardVO">
+	<insert id="insertAttachment" parameterType="egovframework.example.main.service.BoardFileVO">
 		INSERT INTO BOARD_FILE(post_id, file_seq, file_name, file_path, file_size)
 		 VALUES(#{postId}, #{fileSeq}, #{fileName}, #{filePath}, #{fileSize})
 	</insert>
 	
-	<!-- 게시글 불러오기 -->
-	<select id="boardList" parameterType="egovframework.example.main.service.BoardView" resultMap="BoardViewMap">
-		SELECT * FROM BOARD
-		WHERE 1=1
-			
+	<!-- 게시글 리스트 불러오기 -->
+	<select id="boardList" parameterType="egovframework.example.main.service.BoardView" resultMap="BoardVOMap">
+		 SELECT * FROM BOARD
+		<where>
 			<if test="searchType != 0 and searchText != null and searchText != ''">
-				  <choose>
-            		<when test="searchType == 1"> AND title   LIKE CONCAT('%', #{searchText}, '%') </when>
-            		<when test="searchType == 2"> AND author  LIKE CONCAT('%', #{searchText}, '%') </when>
-            		<when test="searchType == 3"> AND content LIKE CONCAT('%', #{searchText}, '%') </when>
-        		</choose>
+				<choose>
+					<when test="searchType == 1"> AND title   LIKE CONCAT('%', #{searchText}, '%') </when>
+        			<when test="searchType == 2"> AND author  LIKE CONCAT('%', #{searchText}, '%') </when>
+        			<when test="searchType == 3"> AND content LIKE CONCAT('%', #{searchText}, '%') </when>
+				</choose>
 			</if>
+		</where>
 		ORDER BY board_id DESC
 		LIMIT #{firstIndex}, #{pageUnit}
-	</select>
+  	</select>
 	
 	<!-- 게시글 총 갯수 조회 -->
 	<select id="boardListTot" parameterType="egovframework.example.main.service.BoardView" resultType="java.lang.Integer">
@@ -61,12 +64,40 @@
 	</update>
 	
 	<!-- 게시글 조회 -->
-	<select id="boardDetail" parameterType="egovframework.example.main.service.BoardVO" resultMap="BoardViewMap">
+	<select id="boardDetail" parameterType="egovframework.example.main.service.BoardVO" resultMap="BoardVOMap">
 		SELECT * FROM BOARD 
 		WHERE board_id = #{boardId}
 	</select>
-
-	<!-- 첨부파일 조회 -->
 	
-	<!-- 댓글 조회 -->
+	<!-- 댓글 카운트 업데이트 -->
+	<update id="updateCommentCnt" parameterType="int">
+		UPDATE BOARD
+		SET comment_cnt = (
+			SELECT COUNT(*) FROM COMMENTS
+			WHERE board_id = #{boardId}
+		)
+		WHERE board_id = #{boardId}
+		AND allow_comment = 1
+	</update>
+	
+	<!-- 게시글 수정 -->
+	<update id="updateBoard" parameterType="egovframework.example.main.service.BoardVO">
+		UPDATE BOARD
+		SET title = #{title},
+			content = #{content},
+			created_at = NOW(),
+			allow_comment = #{allowComment}
+		WHERE board_id = #{boardId}
+	</update>
+	
+	<!-- 게시글 삭제 -->
+	<delete id="deleteBoard" parameterType="int">
+		DELETE FROM BOARD
+		WHERE board_id = #{boardId}
+	</delete>
+	
+	<!-- BOARD AUTO_INCREMENT 리셋 -->
+	<update id="resetBoardId">
+		ALTER TABLE BOARD AUTO_INCREMENT = 1
+	</update>
 </mapper>

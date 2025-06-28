@@ -32,10 +32,11 @@ public class BoardView implements Serializable{
     /* pageUnit과 같은 역활 */
     private int recordCntPerPage;
 
+    /** GET/SET */
 	public int getSearchType() {
 		return searchType;
 	}
-
+	
 	public void setSearchType(int searchType) {
 		this.searchType = searchType;
 	}

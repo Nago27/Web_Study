@@ -1,15 +1,18 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="ui" uri="http://egovframework.gov/ctl/ui" %>
-<c:url var="mainUrl" value="/main.do"/>
-
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>메인 홈페이지</title>
 <link rel="stylesheet" href="<c:url value='/css/mainStyle.css'/>"/>
+<script>
+  function goPage(pageNo) {
+    document.searchForm.pageIndex.value = pageNo;
+    document.searchForm.submit();
+  }
+</script>
 </head>
 <body>
 <div id="wrapper">
@@ -43,16 +46,16 @@
 		<div class="post_contents">
 			<h2 class="headline">공지사항</h2>
 			<div class="searchBox">
-				<form id="searchForm" name="searchForm" method="get" action="${mainUrl}">
+				<form id="searchForm" name="searchForm" method="get" action="<c:url value='/main.do' />">
 					<!-- 검색 조건 -->
 					<select name="searchType">
-						<option value="1" ${searchVO.searchType == 1 ? 'selected' : ''}>제목</option>
-						<option value="2" ${searchVO.searchType == 2 ? 'selected' : ''}>작성자</option>
-						<option value="3" ${searchVO.searchType == 3 ? 'selected' : ''}>내용</option>
+						<option value="1" ${searchVO.searchType=='1' ? 'selected':''}>제목</option>
+						<option value="2" ${searchVO.searchType=='2' ? 'selected':''}>작성자</option>
+						<option value="3" ${searchVO.searchType=='3' ? 'selected':''}>내용</option>
 					</select>
 					<input type="text" name="searchText"  value="${searchVO.searchText}" autocomplete="off"/>
 					<button type="submit" id="search_btn">검색</button>
-					<button type="button" id="searchAll" onclick="location.href='${mainUrl}';">전체보기</button>
+					<button type="button" id="searchAll" onclick="location.href='${pageContext.request.contextPath}/main.do';">전체보기</button>
 					
 					<!-- 페이징 파라미터 유지용 hidden -->
           			<input type="hidden" name="pageIndex" value="${searchVO.pageIndex}" />
@@ -78,16 +81,16 @@
                 	</tr>
                 </thead>
                 <tbody>
-                	<c:forEach var="post" items="${resultList}">
-                		<tr style="height:40px;">
-                			<td><c:out value="${post.boardId}"/></td>
+                	<c:forEach var="post" items="${resultList}" varStatus="st">
+                		<tr style="height: 40px">
+                			<td>${boardNo - st.index}</td>
                 			<td class="td_title">
-                				<a href="<c:url value='/BoardDetail.do?boardId=${post.boardId}' />">
+                				<a href="<c:url value='/board/BoardDetail.do?boardId=${post.boardId}' />">
                 					<c:out value="${post.title}"/>
                 				</a>
                 			</td>
                 			<td><c:out value="${post.author}"/></td>
-                			<td><c:out value="${post.createdAt.toString().substring(0,10)}"/></td>
+                			<td><c:out value="${post.createdAt.toString().substring(0, 10)}"/></td>
                 			<td><c:out value="${post.views}"/></td>
                 		</tr>
                 	</c:forEach>
@@ -99,22 +102,13 @@
                 </tbody>
 			</table>
 			<div class="num_page">
-				  <ui:pagination
-    				paginationInfo="${paginationInfo}"
-    				type="text"
-    				jsFunction="goPage"/>
+				<ui:pagination paginationInfo="${paginationInfo}" type="text" jsFunction="goPage" />
 			</div>
 		</div>
 		<div class="write_btn_container">
-			<a href="<c:url value='/WritePage.do'/>" class="write_btn">작성하기</a>
+			<a href="<c:url value='/board/WritePage.do'/>" class="write_btn">작성하기</a>
 		</div>
 	</main>
 </div>
-<script>
-  function goPage(pageNo) {
-    document.searchForm.pageIndex.value = pageNo;
-    document.searchForm.submit();
-  }
-</script>
 </body>
 </html>

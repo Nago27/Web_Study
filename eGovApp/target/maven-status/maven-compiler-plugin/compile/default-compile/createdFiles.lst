@@ -1,5 +1,6 @@
 egovframework/example/cmmn/web/EgovImgPaginationRenderer.class
 egovframework/example/login/impl/LoginDAO.class
+egovframework/example/main/impl/BoardUtilServiceImpl.class
 egovframework/example/main/service/BoardService.class
 egovframework/example/cmmn/LoginVO.class
 egovframework/example/cmmn/EgovSampleOthersExcepHndlr.class
@@ -7,6 +8,8 @@ egovframework/example/cmmn/web/EgovBindingInitializer.class
 egovframework/example/main/controller/MainController.class
 egovframework/example/main/impl/BoardDAO.class
 egovframework/example/main/impl/BoardServiceImpl.class
+egovframework/example/main/service/BoardUtilService.class
+egovframework/example/main/impl/BoardUtilDAO.class
 egovframework/example/main/service/BoardVO.class
 egovframework/example/login/controller/RegisterController.class
 egovframework/example/login/service/LoginService.class
@@ -15,5 +18,6 @@ egovframework/example/main/service/BoardFileVO.class
 egovframework/example/login/config/JasyptConfig.class
 egovframework/example/cmmn/EgovSampleExcepHndlr.class
 egovframework/example/login/controller/LoginController.class
+egovframework/example/main/service/CommentVO.class
 egovframework/example/main/service/BoardView.class
 egovframework/example/login/impl/LoginServiceImpl.class

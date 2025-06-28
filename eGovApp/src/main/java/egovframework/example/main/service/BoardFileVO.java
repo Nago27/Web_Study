@@ -9,18 +9,25 @@ public class BoardFileVO implements Serializable{
 	 */
 	private static final long serialVersionUID = 1L;
 	
+	/* 첨부파일 id */
 	private int fileId;
 	
+	/* 게시글 id (외래키) */
 	private int postId;
-
+	
+	/* 게시글 내 첨부파일 순서 */
 	private int fileSeq;
 	
+	/* 파일 이름 */
 	private String fileName;
 	
+	/* 파일 경로 */
 	private String filePath;
 	
+	/* 파일 크기 */
 	private long fileSize;
 
+	/** GET/SET */
 	public int getFileId() {
 		return fileId;
 	}

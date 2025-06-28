@@ -14,7 +14,6 @@ import egovframework.example.main.service.BoardView;
 
 @Service("boardService")
 public class BoardServiceImpl extends EgovAbstractServiceImpl implements BoardService {
-
 	@Resource(name="boardDAO")
 	private BoardDAO boardDAO;
 	
@@ -37,7 +36,7 @@ public class BoardServiceImpl extends EgovAbstractServiceImpl implements BoardSe
 	public Integer boardListTot(BoardView vo) throws Exception {
 		return boardDAO.boardListTot(vo);
 	}
-
+	
 	@Override
 	public void viewCnt(int boardId) throws Exception {
 		boardDAO.viewCnt(boardId);
@@ -49,7 +48,18 @@ public class BoardServiceImpl extends EgovAbstractServiceImpl implements BoardSe
 	}
 
 	@Override
-	public void deleteBoard(BoardVO vo) throws Exception {
-		
+	public void updateCommentCnt(int boardId) throws Exception {
+		boardDAO.updateCommentCnt(boardId);
+	}
+
+	@Override
+	public void updateBoard(BoardVO vo) throws Exception {
+		boardDAO.updateBoard(vo);
+	}
+
+	@Override
+	public void removeBoard(int boardId) throws Exception {
+		boardDAO.deleteBoard(boardId);
+		boardDAO.resetBoardId();
 	}
 }

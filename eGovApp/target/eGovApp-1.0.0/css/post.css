@@ -1,5 +1,15 @@
 @charset "UTF-8";
 
+/* root */
+ul, li {
+	list-style: none;
+}
+
+form {
+	display: block;
+}
+
+/* title style */
 .detail_title {
 	padding : 15px 20px;
 	background: #f6f9ff;
@@ -36,14 +46,123 @@
     background: #ccc;
 }
 
-
+/* content style */
 .detail_content {
 	width: 100%;
     background: #fff;
     font-size: 1em;
     line-height: 1.6em;
-    min-height: 300px;
+    min-height: 400px;
     padding: 1.5em 2em;
     list-style-type: decimal;
     overflow: auto;
+}
+
+/* attachment list style */
+.fileShow {
+	border-top: 1px solid #d4ddef;
+	list-style: none;
+}
+
+.fileShow li {
+	min-height: 45px;
+	border-bottom: 1px solid #d4ddef;
+	font-family: 'Noto Sans KR';
+	font-size: inherit;
+	display: flex;
+}
+.fileShow li span {
+	background: #f6f9ff;
+    padding: 10px 15px;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    width: 170px;
+}
+
+.fileShow li b {
+	color: #222;
+	display: inline-block;
+	padding: 10px 20px;
+}
+
+.fileShow li a {
+	color: #222 !important;
+	text-decoration: none;
+	display: block;
+}
+
+/* comment style */
+.cmm_title {
+	font-size: 20px;
+    line-height: 1em;
+    color: #000;
+    padding-left: 12px;
+    border-left: 6px solid #00a050;
+    margin-bottom: 15px
+}
+.cmm_title span {
+	color: #222;
+	border: 0;
+	padding: 0;
+}
+
+textarea {
+	width: 100%;
+	height: 100px;
+	border: 1px solid #e6e6e6;
+    padding: 15px;
+}
+
+.btn_comment {
+	text-align: right;
+	margin-bottom: 20px;
+}
+.btn_comment > .btn_write {
+	background: #303b50;
+    color: #fff;
+    border: 1px solid #303b50;
+}
+.btn_comment a {
+	width: 120px;
+    height: 40px;
+    text-align: center;
+    font-size: 14px;
+    padding: 9px 0;
+    display: inline-block;
+}
+
+/* comment list */
+.table_cmm {
+	width: 100%;
+	border-bottom: 1px solid #dedede;
+	border-spacing: 0;
+	border-collapse: collapse;
+}
+
+.table_cmm td {
+	color: #666;
+	padding: 10px 15px;
+	font-size: 14px;
+	border-top: 1px solid #dedede;
+}
+
+.table_cmm tr:first-child th,
+.table_cmm tr:first-child td {
+	border-top: 1px solid #000;
+}
+
+.table_cmm th {
+	font-size: 14px;
+	font-weight: 600;
+	background: #f6f9ff;
+	border-top: 1px solid #dedede;
+	padding: 10px 20px;
+	text-align: center;
+}
+
+.btn_delete_cmm {
+	float: left;
+	color: #ef1c1c;
 }
